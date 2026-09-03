@@ -1,7 +1,9 @@
-.. _WebSocketsProxyMiddleware: https://github.com/ThreeMammals/Ocelot/blob/main/src/Ocelot/WebSockets/WebSocketsProxyMiddleware.cs
-
 Websockets
 ==========
+.. contents:: Table of Contents
+   :depth: 2
+   :local:
+.. _WebSocketsProxyMiddleware: https://github.com/ThreeMammals/Ocelot/blob/main/src/Ocelot/WebSockets/WebSocketsProxyMiddleware.cs
 
   * Ocelot Middleware: `WebSocketsProxyMiddleware`_
   * RFC 6455 Specification: `The WebSocket Protocol <https://datatracker.ietf.org/doc/html/rfc6455>`_ by Internet Engineering Task Force (IETF) organization
@@ -59,9 +61,9 @@ Ocelot supports proxying *SignalR*. To enable this with Ocelot, you need to do t
 
 First, install the `SignalR Client <https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client>`_ NuGet package:
 
-.. code-block:: powershell
+.. code-block:: shell
 
-  Install-Package Microsoft.AspNetCore.SignalR.Client
+  dotnet add package Microsoft.AspNetCore.SignalR.Client
 
 .. _break: http://break.do
 
@@ -133,12 +135,15 @@ If you want to ignore SSL warnings (errors) [#f3]_, configure your route as foll
 Refer to the official notes regarding :ref:`ssl-errors` in the :doc:`../features/configuration` documentation.
 There, you can also explore best practices tailored for your environments.
 
+.. _ws-supported:
+
 Supported
 ---------
 
 1. :doc:`../features/routing`
 2. :doc:`../features/loadbalancer`
-3. :doc:`../features/servicediscovery`
+3. :ref:`Security Options <routing-security-options>` [#f4]_
+4. :doc:`../features/servicediscovery`
 
 This means you can configure your downstream services to run *WebSockets* and either:
 
@@ -162,14 +167,14 @@ Below is a list of features that will not work:
 8. :doc:`../features/delegatinghandlers`
 9. :doc:`../features/claimstransformation`
 10. :doc:`../features/caching`
-11. :doc:`../features/authentication` [#f4]_
+11. :doc:`../features/authentication` [#f5]_
 12. :doc:`../features/authorization`
 
 We cannot be entirely sure how this feature will behave once it is widely used. Therefore, thorough testing is strongly recommended!
 
 .. _ws-sample:
 
-Sample [#f5]_
+Sample [#f6]_
 -------------
 
   | **Project**: `samples <https://github.com/ThreeMammals/Ocelot/tree/main/samples>`_ / `WebSocket <https://github.com/ThreeMammals/Ocelot/tree/main/samples/WebSocket>`_
@@ -244,11 +249,13 @@ Additionally, we welcome any bug reports, enhancement suggestions, or proposals 
 
 .. [#f1] The :doc:`../features/websockets` functionality was requested in issue `212 <https://github.com/ThreeMammals/Ocelot/issues/212>`_ and introduced in version `5.3.0`_.
 .. [#f2] The :ref:`SignalR <ws-signalr>` functionality was requested in issue `344`_ and published in version `8.0.7`_.
-.. [#f3] The ":ref:`ws-secure`"  feature includes a ``wss`` scheme fake validator, which was introduced in pull request `1377`_ as part of issues `1375`_, `1237`_, and others.
+.. [#f3] The ":ref:`ws-secure`" feature includes a ``wss`` scheme fake validator, which was introduced in pull request `1377`_ as part of issues `1375`_, `1237`_, and others.
   This "life hack" for self-signed SSL certificates is available starting from version `20.0`_.
   However, it will be either removed or reworked in future releases. For further details, refer to the :ref:`ssl-errors` section.
-.. [#f4] If requested, we might explore options for implementing basic authentication.
-.. [#f5] The :ref:`Sample <ws-sample>` was introduced for issue `2386`_ and implemented in pull request `2387`_, as part of version `25.0`_.
+.. [#f4] IP allowed/blocked lists are enforced on the *WebSocket* upgrade request.
+  The ":ref:`Security Options <routing-security-options>`" feature has been supported since version `25.0`_, as a result of fixing bug `2403`_ in pull request `2406`_.
+.. [#f5] If requested, we might explore options for implementing basic authentication.
+.. [#f6] The :ref:`Sample <ws-sample>` was introduced for issue `2386`_ and implemented in pull request `2387`_, as part of version `25.0`_.
 
 .. _Program: https://github.com/ThreeMammals/Ocelot/blob/main/samples/WebSocket/Program.cs
 .. _ocelot.json: https://github.com/ThreeMammals/Ocelot/blob/main/samples/WebSocket/ocelot.json
@@ -262,10 +269,13 @@ Additionally, we welcome any bug reports, enhancement suggestions, or proposals 
 .. _1707: https://github.com/ThreeMammals/Ocelot/issues/1707
 .. _2386: https://github.com/ThreeMammals/Ocelot/issues/2386
 .. _2387: https://github.com/ThreeMammals/Ocelot/pull/2387
+.. _2403: https://github.com/ThreeMammals/Ocelot/issues/2403
+.. _2406: https://github.com/ThreeMammals/Ocelot/pull/2406
+
 .. _5.3.0: https://github.com/ThreeMammals/Ocelot/releases/tag/5.3.0
 .. _8.0.7: https://github.com/ThreeMammals/Ocelot/releases/tag/8.0.7
 .. _20.0: https://github.com/ThreeMammals/Ocelot/releases/tag/20.0.0
-.. _25.0: https://github.com/ThreeMammals/Ocelot/releases/tag/25.0.0-beta.3
+.. _25.0: https://github.com/ThreeMammals/Ocelot/releases/tag/25.0.0
 
 .. |octocat| image:: https://github.githubassets.com/images/icons/emoji/octocat.png
   :alt: octocat

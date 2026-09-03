@@ -24,10 +24,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ServiceFabric" Version="12.0.997-beta" />
-    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="8.4.268" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="8.6.235" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Ocelot\Ocelot.csproj" />
+    <ProjectReference Include="..\..\..\src\Ocelot.csproj" />
     <ProjectReference Include="..\..\Web\Ocelot.Samples.Web.csproj" />
   </ItemGroup>
 </Project>
